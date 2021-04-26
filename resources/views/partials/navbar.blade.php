@@ -17,7 +17,7 @@
             </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/municipios/create">Agregar Municipio</a></li>
-              <li><a class="dropdown-item" href="/municipios/show">Ver Municipios</a></li>
+              <li><a class="dropdown-item" href="/municipios">Ver Municipios</a></li>
             </ul>
           </li>
           {{--  Equipos  --}}
@@ -27,7 +27,7 @@
             </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/equipos/create">Agregar Equipos</a></li>
-              <li><a class="dropdown-item" href="/equipos/show">Ver Equipos</a></li>
+              <li><a class="dropdown-item" href="/equipos">Ver Equipos</a></li>
             </ul>
           {{--  Jugadores  --}}
           <li class="nav-item dropdown">
@@ -36,7 +36,7 @@
             </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/jugadores/create">Agregar Jugadores</a></li>
-              <li><a class="dropdown-item" href="/jugadores/show">Ver Jugadores</a></li>
+              <li><a class="dropdown-item" href="/jugadores">Ver Jugadores</a></li>
             </ul>
           {{--  Posiciones  --}}
           <li class="nav-item dropdown">
@@ -45,7 +45,7 @@
             </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/posiciones/create">Agregar Posiciones</a></li>
-              <li><a class="dropdown-item" href="/posiciones/show">Ver Posiciones</a></li>
+              <li><a class="dropdown-item" href="/posiciones">Ver Posiciones</a></li>
             </ul>
           </li>
         </ul>
