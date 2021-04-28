@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\inicioController;
+use App\Http\Controllers\EquiposController;
+use App\Http\Controllers\JugadoresController;
+use App\Http\Controllers\MunicipiosController;
+use App\Http\Controllers\PosicionesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,64 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Equipos
+//Inicio
+Route::get('/', [inicioController::class, 'index']);
 
-Route::get('/', function () {
-    return view('inicio');
-});
-Route::get('equipos', function () {
-    return view('equipos.index');
-});
-Route::get('equipos/create', function () {
-    return view('equipos.create');
-});
-Route::get('equipos/{id}', function ($id) {
-    return view('equipos.show') -> with('id', $id);
-});
-Route::get('equipos/{id}/edit', function ($id) {
-    return view('equipos.edit') -> with('id', $id);
-});
+//Equipos
+Route::resource('equipos', EquiposController::class);
 
 //Jugadores
-Route::get('jugadores', function () {
-    return view('jugadores.index');
-});
-Route::get('jugadores/create', function () {
-    return view('jugadores.create');
-});
-Route::get('jugadores/{id}', function ($id) {
-    return view('jugadores.show') -> with('id', $id);
-});
-Route::get('jugadores/{id}/edit', function ($id) {
-    return view('jugadores.edit') -> with('id', $id);
-});
-
+Route::resource('jugadores', JugadoresController::class);
 
 //Municipios
-Route::get('municipios', function () {
-    return view('municipios.index');
-});
-Route::get('municipios/create', function () {
-    return view('municipios.create');
-});
-Route::get('municipios/{id}', function ($id) {
-    return view('municipios.show') -> with('id', $id);
-});
-Route::get('municipios/{id}/edit', function ($id) {
-    return view('municipios.edit') -> with('id', $id);
-});
-
+Route::resource('municipios', MunicipiosController::class);
 
 //Posiciones
-Route::get('posiciones', function () {
-    return view('posiciones.index');
-});
-Route::get('posiciones/create', function () {
-    return view('posiciones.create');
-});
-Route::get('posiciones/{id}', function ($id) {
-    return view('posiciones.show') -> with('id', $id);
-});
-Route::get('posiciones/{id}/edit', function ($id) {
-    return view('posiciones.edit') -> with('id', $id);
-});
+Route::resource('posiciones', PosicionesController::class);
