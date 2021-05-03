@@ -3,7 +3,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-success ps-5 pe-5 mb-3 d-flex flex-column flex-md-row align-items-center  border-bottom shadow-sm">
     <div class="container-fluid d-flex">
 
-      <a class="navbar-brand font-weight-bolder" href="/">Torneo Laravel <i class="fas fa-futbol"></i> </a>
+      <a class="navbar-brand font-weight-bolder p-2" href="/">Torneo Laravel <i class="fas fa-futbol"></i> </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
