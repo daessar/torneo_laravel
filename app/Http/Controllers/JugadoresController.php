@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Jugador;
+use App\Models\Equipo;
+use App\Models\Posicion;
 
 class JugadoresController extends Controller
 {
@@ -54,7 +57,9 @@ class JugadoresController extends Controller
      */
     public function create()
     {
-        return view('jugadores.create');
+        $equipos = Equipo::all();
+        $posiciones = Posicion::all();
+        return view('jugadores.create')->with('equipos', $equipos)->with('posiciones', $posiciones);
     }
 
     /**
@@ -65,7 +70,29 @@ class JugadoresController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // VALIDACIONES
+        $request->validate([
+            'foto' => 'required|image',
+            'nombre' => 'required',
+            'posicion' => 'required',
+            'numero' => 'required',
+            'equipo' => 'required',
+        ]);
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $foto = time() . $file->getClientOriginalName();
+            $file->move("image/jugadores",$foto);
+        }
+        //Inserción de datos
+        $jugador = new Jugador();
+        $jugador->foto = $foto;
+        $jugador->nombre = $request->nombre;
+        $jugador->posicion_id= $request->posicion;
+        $jugador->numero = $request->numero;
+        $jugador->equipo_id = $request->equipo;
+        $jugador->save();
+        return "Guardado";
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Municipio;
+use App\Models\Equipo;
 
 class EquiposController extends Controller
 {
@@ -50,7 +52,8 @@ class EquiposController extends Controller
      */
     public function create()
     {
-        return view('equipos.create');
+        $municipios = Municipio::all();
+        return view('equipos.create')->with('municipios',$municipios);
     }
 
     /**
@@ -61,7 +64,27 @@ class EquiposController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // VALIDACIONES
+        $request->validate([
+            'nombre' => 'required',
+            'dt' => 'required',
+            'municipio' => 'required',
+            'escudo' => 'required|image'
+        ]);
+
+        if($request->hasFile('escudo')){
+            $file = $request->file('escudo');
+            $escudo = time() . $file->getClientOriginalName();
+            $file->move("image/equipos",$escudo);
+        }
+        //Inserción de datos
+        $equipo = new Equipo();
+        $equipo->nombre = $request->nombre;
+        $equipo->dt = $request->dt;
+        $equipo->municipio_id = $request->municipio;
+        $equipo->escudo = $escudo;
+        $equipo->save();
+        return "Guardado";
     }
 
     /**

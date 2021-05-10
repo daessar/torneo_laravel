@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Posicion;
 
 class PosicionesController extends Controller
 {
@@ -54,7 +55,14 @@ class PosicionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // VALIDACIONES
+        $request->validate(['nombre' => 'required']);
+
+        //Inserción de datos
+        $municipio = new Posicion();
+        $municipio->nombre = $request->nombre;
+        $municipio->save();
+        return ('Guardado');
     }
 
     /**

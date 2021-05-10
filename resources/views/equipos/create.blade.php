@@ -10,22 +10,35 @@
         <div class="form-group">
           <label for="nombre">Nombre</label>
           <input type="text" class="form-control" id="nombre" name="nombre">
+          @error('nombre')
+            <small>{{ $message }}</small>
+          @enderror
         </div>
         <div class="form-group">
           <label for="dt">D.T.</label>
           <input type="text" class="form-control" id="dt" name="dt">
+          @error('dt')
+            <small>{{ $message }}</small>
+          @enderror
         </div>
         <div class="form-group">
           <label for="municipio">Municipio</label>
           <select class="form-control" id="municipio" name="municipio">
-            <option value="1">Manizales</option>
-            <option value="2">Pereira</option>
-            <option value="3">Armenia</option>
+            <option selected>Seleccione un municipio</option>
+            @foreach($municipios as $municipio)
+            <option value="{{ $municipio->id }}">{{ $municipio->nombre}}</option>
+            @endforeach
           </select>
+          @error('municipio')
+            <small>{{ $message }}</small>
+          @enderror
         </div>
         <div class="form-group">
           <label for="escudo">Escudo</label>
           <input type="file" class="form-control-file" id="escudo" name="escudo">
+          @error('escudo')
+            <small>{{ $message }}</small>
+          @enderror
         </div>
         <button type="submit" class="btn btn-success">Crear</button>
       </form>

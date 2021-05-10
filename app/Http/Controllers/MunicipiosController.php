@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Municipio;
 
 class MunicipiosController extends Controller
 {
@@ -54,7 +54,14 @@ class MunicipiosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // VALIDACIONES
+        $request->validate(['nombre' => 'required']);
+
+        //Inserción de datos
+        $municipio = new Municipio();
+        $municipio->nombre = $request->nombre;
+        $municipio->save();
+        return ('Guardado');
     }
 
     /**
