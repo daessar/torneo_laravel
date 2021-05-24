@@ -25,10 +25,10 @@
                 @foreach ($jugadores as $jugador)
                 <tr class="text-center">
                     <td><img src="{{ asset('image/jugadores/' . $jugador->foto) }}" width="45" height="45"></td>
-                    <td>{{ $jugador ->nombre }}</td>
-                    <td>{{ $jugador ->posicion_id }}</td>
-                    <td>{{ $jugador ->numero }}</td>
-                    <td>{{ $jugador ->equipo_id }}</td>
+                    <td>{{ $jugador->nombre }}</td>
+                    <td>{{ $jugador->posicion["nombre"] }}</td>
+                    <td>{{ $jugador->numero }}</td>
+                    <td>{{ $jugador->equipo["nombre"] }}</td>
                     <td>
                         <a href="/jugadores/{{ $jugador->id }}" class="btn btn-warning active" aria-current="page"><i class="fas fa-eye"></i></a>
                         <a href="/jugadores/{{ $jugador->id }}/edit" class="btn btn-primary active" aria-current="page"><i class="fas fa-marker"></i></a>

@@ -11,9 +11,9 @@ class Jugador extends Model
     protected $table = 'jugadores';
 
     public function equipo(){
-        return $this->hasMany(Equipo::class);
+        return $this->belongsTo(Equipo::class);
     }
     public function posicion(){
-        return $this->hasMany(Posicion::class);
+        return $this->belongsTo(Posicion::class);
     }
 }

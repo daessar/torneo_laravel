@@ -12,6 +12,6 @@ class Equipo extends Model
         return $this->hasMany(Jugador::class);
     }
     public function municipio(){
-        return $this->hasMany(Municipio::class);
+        return $this->belongsTo(Municipio::class);
     }
 }
