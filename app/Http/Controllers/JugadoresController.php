@@ -6,40 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Jugador;
 use App\Models\Equipo;
 use App\Models\Posicion;
+// Reglas de validación
+use App\Http\Requests\StoreJugadoresRequest;
 
 class JugadoresController extends Controller
 {
-    //Simulando la bd con arrays
-    private $jugadores = array(
-        array(
-            'foto' => 'https://www.coleka.com/media/item/201804/08/fifa-world-cup-russia-2018-radamel-falcao-garcia-colombia-646.jpg',
-            'nombre' => 'Radamel Falcao',
-            'posicion' => 'Delantero',
-            'numero' => '9',
-            'equipo' => 'Millonarios'
-        ),
-        array(
-            'foto' => 'https://images-na.ssl-images-amazon.com/images/I/518FzVYzKsL.__AC_SY445_QL70_ML2_.jpg',
-            'nombre' => 'James Rodriguez',
-            'posicion' => 'Volante',
-            'numero' => '10',
-            'equipo' => 'Nacional'
-        ),
-        array(
-            'foto' => 'https://thumbs.coleka.com/media/item/201807/20/fifa-world-cup-russia-2018-juan-quintero-colombia-649-u.webp',
-            'nombre' => 'Juanfer Quintero',
-            'posicion' => 'Volante',
-            'numero' => '7',
-            'equipo' => 'Once Caldas'
-        ),
-        array(
-            'foto' => 'https://cloud10.todocoleccion.online/cromos-futbol/tc/2018/03/24/13/116165271_05_12.jpg',
-            'nombre' => 'Juan Cuadrado',
-            'posicion' => 'Lateral Derecho',
-            'numero' => '11',
-            'equipo' => 'America'
-        ),
-    );
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +19,8 @@ class JugadoresController extends Controller
      */
     public function index()
     {
-        return view('jugadores.index') -> with('jugadores', $this -> jugadores); //Enviando el controlador
+        $jugadores = Jugador::all();
+        return view('jugadores.index') -> with('jugadores', $jugadores); //Enviando el controlador
     }
 
     /**
@@ -68,17 +41,8 @@ class JugadoresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreJugadoresRequest $request)
     {
-        // VALIDACIONES
-        $request->validate([
-            'foto' => 'required|image',
-            'nombre' => 'required',
-            'posicion' => 'required',
-            'numero' => 'required',
-            'equipo' => 'required',
-        ]);
-
         if($request->hasFile('foto')){
             $file = $request->file('foto');
             $foto = time() . $file->getClientOriginalName();
@@ -88,11 +52,11 @@ class JugadoresController extends Controller
         $jugador = new Jugador();
         $jugador->foto = $foto;
         $jugador->nombre = $request->nombre;
-        $jugador->posicion_id= $request->posicion;
+        $jugador->posicion_id = $request->posicion;
         $jugador->numero = $request->numero;
-        $jugador->equipo_id = $request->equipo;
+        $jugador->equipo_id["nombre"] = $request->equipo;
         $jugador->save();
-        return "Guardado";
+        return redirect()->route('jugadores.index')->with('status', 'Jugador Creado');
     }
 
     /**

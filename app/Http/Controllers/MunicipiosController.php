@@ -3,29 +3,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Municipio;
+// Reglas de validación
+use App\Http\Requests\StoreMunicipiosRequest;
 
 class MunicipiosController extends Controller
 {
-    //Simulando la bd con arrays
-    private $municipios = array(
-        array(
-            'id' => '1',
-            'nombre' => 'Manizales',
-        ),
-        array(
-            'id' => '2',
-            'nombre' => 'Medellin',
-        ),
-        array(
-            'id' => '3',
-            'nombre' => 'Bogotá',
-        ),
-        array(
-            'id' => '4',
-            'nombre' => 'Cali',
-        ),
-        
-    );
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +15,9 @@ class MunicipiosController extends Controller
      */
     public function index()
     {
-        return view('municipios.index') -> with('municipios', $this -> municipios);;
+        #Trayendo los datos de bd
+        $municipios = Municipio::all();
+        return view('municipios.index') -> with('municipios', $municipios);
     }
 
     /**
@@ -52,16 +36,14 @@ class MunicipiosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMunicipiosRequest $request)
     {
-        // VALIDACIONES
-        $request->validate(['nombre' => 'required']);
 
         //Inserción de datos
         $municipio = new Municipio();
         $municipio->nombre = $request->nombre;
         $municipio->save();
-        return ('Guardado');
+        return redirect()->route('municipios.index')->with('status', 'Municipio Creado');
     }
 
     /**

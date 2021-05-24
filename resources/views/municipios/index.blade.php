@@ -5,6 +5,11 @@
     <h1 class="text text-center mt-3">Listado de Municipios</h1>
     <hr>
     <div class="container">
+        @if(session('status'))
+            <div class="alert alert-success" role="alert">
+                Municipio creado exitosamente
+            </div>
+        @endif
         <table class="table">
             <thead class="bg-success">
                 <tr class="text-center">

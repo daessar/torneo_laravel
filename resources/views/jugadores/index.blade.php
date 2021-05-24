@@ -5,6 +5,11 @@
     <h1 class="text text-center mt-3">Listado de Jugadores</h1>
     <hr>
     <div class="container">
+        @if(session('status'))
+        <div class="alert alert-success" role="alert">
+            Jugador creado exitosamente!
+        </div>
+        @endif
         <table class="table">
             <thead class="bg-success">
                 <tr class="text-center">
@@ -17,16 +22,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($jugadores as $key => $jugador)
+                @foreach ($jugadores as $jugador)
                 <tr class="text-center">
-                    <td><img src="{{ $jugador['foto'] }}" width="45" height="45"></td>
-                    <td>{{ $jugador['nombre'] }}</td>
-                    <td>{{ $jugador['posicion'] }}</td>
-                    <td>{{ $jugador['numero'] }}</td>
-                    <td>{{ $jugador['equipo'] }}</td>
+                    <td><img src="{{ asset('image/jugadores/' . $jugador->foto) }}" width="45" height="45"></td>
+                    <td>{{ $jugador ->nombre }}</td>
+                    <td>{{ $jugador ->posicion_id }}</td>
+                    <td>{{ $jugador ->numero }}</td>
+                    <td>{{ $jugador ->equipo_id }}</td>
                     <td>
-                        <a href="/jugadores/{{ $key }}" class="btn btn-warning active" aria-current="page"><i class="fas fa-eye"></i></a>
-                        <a href="/jugadores/{{ $key }}/edit" class="btn btn-primary active" aria-current="page"><i class="fas fa-marker"></i></a>
+                        <a href="/jugadores/{{ $jugador->id }}" class="btn btn-warning active" aria-current="page"><i class="fas fa-eye"></i></a>
+                        <a href="/jugadores/{{ $jugador->id }}/edit" class="btn btn-primary active" aria-current="page"><i class="fas fa-marker"></i></a>
                         <a href="#" class="btn btn-danger active" aria-current="page"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>

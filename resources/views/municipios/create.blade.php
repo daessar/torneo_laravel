@@ -11,7 +11,7 @@
         <label for="nombre" class="form-label">Nombre del municipio</label>
         <input type="text" class="form-control" id="nombre" name="nombre">
         @error('nombre')
-            <small>{{ $message }}</small>
+            <small style="color: red">{{ $message }}</small>
           @enderror
       </div>
       <button type="submit" class="btn btn-success">Insertar</button>

@@ -12,14 +12,14 @@
           <label for="foto">Foto</label>
           <input type="file" class="form-control-file" id="foto" name="foto">
           @error('foto')
-            <small>{{ $message }}</small>
+            <small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <div class="form-group">
           <label for="nombre">Nombre</label>
           <input type="text" class="form-control" id="nombre" name="nombre">
           @error('nombre')
-            <small>{{ $message }}</small>
+            <small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <div class="form-group">
@@ -31,14 +31,14 @@
             @endforeach
           </select>
           @error('posicion')
-            <small>{{ $message }}</small>
+            <small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <div class="form-group">
           <label for="numero">Número</label>
           <input type="number" class="form-control" id="numero" name="numero">
           @error('numero')
-            <small>{{ $message }}</small>
+            <small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <div class="form-group">
@@ -50,7 +50,7 @@
             @endforeach
           </select>
           @error('equipo')
-            <small>{{ $message }}</small>
+            <small style="color: red">{{ $message }}</small>
           @enderror
         </div>
         <button type="submit" class="btn btn-success">Crear</button>

@@ -4,29 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Posicion;
+// Reglas de validación
+use App\Http\Requests\StorePosicionesRequest;
 
 class PosicionesController extends Controller
 {
-    //Simulando la bd con arrays
-    private $posiciones = array(
-        array(
-            'id' => '1',
-            'nombre' => 'Delantero',
-        ),
-        array(
-            'id' => '2',
-            'nombre' => 'Volante',
-        ),
-        array(
-            'id' => '3',
-            'nombre' => 'Defensa',
-        ),
-        array(
-            'id' => '4',
-            'nombre' => 'Lateral Derecho',
-        ),
-        
-    );
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +16,9 @@ class PosicionesController extends Controller
      */
     public function index()
     {
-        return view('posiciones.index') -> with('posiciones', $this -> posiciones);;
+        #Trayendo los datos de bd
+        $posiciones = Posicion::all();
+        return view('posiciones.index') -> with('posiciones', $posiciones);
     }
 
     /**
@@ -53,16 +37,13 @@ class PosicionesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePosicionesRequest $request)
     {
-        // VALIDACIONES
-        $request->validate(['nombre' => 'required']);
-
         //Inserción de datos
         $municipio = new Posicion();
         $municipio->nombre = $request->nombre;
         $municipio->save();
-        return ('Guardado');
+        return redirect()->route('posiciones.index')->with('status', 'Posición Creada');
     }
 
     /**
