@@ -54,7 +54,7 @@ class JugadoresController extends Controller
         $jugador->nombre = $request->nombre;
         $jugador->posicion_id = $request->posicion;
         $jugador->numero = $request->numero;
-        $jugador->equipo_id["nombre"] = $request->equipo;
+        $jugador->equipo_id = $request->equipo;
         $jugador->save();
         return redirect()->route('jugadores.index')->with('status', 'Jugador Creado');
     }
@@ -67,8 +67,9 @@ class JugadoresController extends Controller
      */
     public function show($id)
     {
+        $jugadores = Jugador::find($id);
         return view('jugadores.show') -> with('id', $id)
-       -> with('jugador', $this -> jugadores[$id]);
+       -> with('jugador', $jugadores);
     }
 
     /**
