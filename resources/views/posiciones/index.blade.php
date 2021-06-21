@@ -19,12 +19,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($posiciones as $key => $posicion)
+                @foreach ($posiciones as $posicion)
                 <tr class="text-center">
-                    <td>{{ $posicion['id'] }}</td>
-                    <td>{{ $posicion['nombre'] }}</td>
+                    <td>{{ $posicion->id }}</td>
+                    <td>{{ $posicion->nombre }}</td>
                     <td>
-                        <a href="/posicion/{{ $key }}/edit" class="btn btn-success active" aria-current="page"><i class="fas fa-marker"></i></a>
+                        <a href="/posicion/{{ $posicion->id }}/edit" class="btn btn-success active" aria-current="page"><i class="fas fa-marker"></i></a>
                         <a href="#" class="btn btn-danger active" aria-current="page"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>

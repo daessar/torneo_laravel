@@ -66,7 +66,8 @@ class MunicipiosController extends Controller
      */
     public function edit($id)
     {
-        return view('municipios.edit') -> with('id', $id);
+        $municipio = Municipio::find($id);
+        return view('municipios.edit') -> with('municipio', $municipio);
     }
 
     /**
@@ -78,7 +79,10 @@ class MunicipiosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $municipio = Municipio::find($id);
+        $municipio->nombre = $request->nombre;
+        $municipio->save();
+        return redirect()->route('municipios.index')->with('status', 'Municipio Actualizado');
     }
 
     /**
@@ -89,6 +93,8 @@ class MunicipiosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $municipio = Municipio::find($id);
+        $municipio->delete();
+        return redirect()->route('municipios.index')->with('status', 'Municipio Eliminado');
     }
 }

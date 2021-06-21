@@ -7,7 +7,7 @@
     <div class="container">
         @if(session('status'))
             <div class="alert alert-success" role="alert">
-                Municipio creado exitosamente
+                {{ session('status')}}
             </div>
         @endif
         <table class="table">
@@ -19,13 +19,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($municipios as $key => $municipio)
+                @foreach ($municipios as $municipio)
                 <tr class="text-center">
-                    <td>{{ $municipio['id'] }}</td>
-                    <td>{{ $municipio['nombre'] }}</td>
+                    <td>{{ $municipio->id }}</td>
+                    <td>{{ $municipio->nombre }}</td>
                     <td>
-                        <a href="/municipios/{{ $key }}/edit" class="btn btn-success active" aria-current="page"><i class="fas fa-marker"></i></a>
-                        <a href="#" class="btn btn-danger active" aria-current="page"><i class="far fa-trash-alt"></i></a>
+                        <a href="/municipios/{{ $municipio->id }}/edit" class="btn btn-success active" aria-current="page"><i class="fas fa-marker"></i></a>
+                        <form action="/municipios/{{$municipio->id}}" method="POST" class="d-inline">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

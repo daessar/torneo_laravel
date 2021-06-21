@@ -66,7 +66,8 @@ class PosicionesController extends Controller
      */
     public function edit($id)
     {
-         return view('posiciones.edit') -> with('id', $id);
+        $posicion = Posicion::find($id);
+         return view('posiciones.edit') -> with('posicion', $posicion);
     }
 
     /**
