@@ -7,7 +7,7 @@
     <div class="container">
         @if(session('status'))
         <div class="alert alert-success" role="alert">
-            Jugador creado exitosamente!
+            {{ session('status')}}
         </div>
         @endif
         <table class="table">
@@ -32,7 +32,11 @@
                     <td>
                         <a href="/jugadores/{{ $jugador->id }}" class="btn btn-warning active" aria-current="page"><i class="fas fa-eye"></i></a>
                         <a href="/jugadores/{{ $jugador->id }}/edit" class="btn btn-primary active" aria-current="page"><i class="fas fa-marker"></i></a>
-                        <a href="#" class="btn btn-danger active" aria-current="page"><i class="far fa-trash-alt"></i></a>
+                        <form action="/jugadores/{{$jugador->id}}" method="POST" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </form>
                     </td>
                 </tr>
                 @endforeach

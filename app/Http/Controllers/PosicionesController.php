@@ -79,7 +79,10 @@ class PosicionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-       //
+        $posicion = Posicion::find($id);
+        $posicion->nombre = $request->nombre;
+        $posicion->save();
+        return redirect()->route('posiciones.index')->with('status', 'Posicion Actualizada');
     }
 
     /**
@@ -90,6 +93,8 @@ class PosicionesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $posicion = Posicion::find($id);
+        $posicion->delete();
+        return redirect()->route('posiciones.index')->with('status', 'Posicion Eliminada');
     }
 }

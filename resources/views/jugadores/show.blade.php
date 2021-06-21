@@ -14,7 +14,11 @@
                 <p class="h5">Posición: {{ $jugador->posicion->nombre }}</p>
                 <p class="h5">Numero: {{ $jugador->numero }}</p>
                 <p class="h5">Equipo: {{ $jugador->equipo->nombre }}</p>
-                <a href="#" class="btn btn-danger">Eliminar</a>
+                <form action="/jugadores/{{$jugador->id}}" method="POST" class="d-inline">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
                 <a href="/jugadores/{{ $id }}/edit" class="btn btn-warning">Modificar</a>
                 <a href="/jugadores" class="btn btn-outline-dark">Ver jugadores</a>
             </div>

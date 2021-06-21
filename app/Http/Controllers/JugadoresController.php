@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Jugador;
 use App\Models\Equipo;
 use App\Models\Posicion;
+use App\Models\Municipio;
 // Reglas de validación
 use App\Http\Requests\StoreJugadoresRequest;
+//Eliminar archivo
+use Illuminate\Support\Facades\file;
 
 class JugadoresController extends Controller
 {
@@ -80,7 +83,11 @@ class JugadoresController extends Controller
      */
     public function edit($id)
     {
-        return view('jugadores.edit') -> with('id', $id);
+        $jugador = Jugador::find($id);
+        $equipo = Equipo::all();
+        $municipios = Municipio::all();
+        $posicion = Posicion::all();
+        return view('jugadores.edit') -> with('jugador', $jugador) -> with('municipios',$municipios) -> with('equipo', $equipo) -> with('posicion', $posicion);
     }
 
     /**
@@ -92,7 +99,18 @@ class JugadoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jugador = Jugador::find($id);
+        $jugador->nombre = $request->nombre;
+        $jugador->posicion_id = $request->posicion;
+        $jugador->numero = $request->numero;
+        $jugador->equipo_id = $request->equipo;
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $foto = time() . $file->getClientOriginalName();
+            $file->move("image/jugadores",$foto);
+        }
+        $jugador->save();
+        return redirect()->route('jugadores.index')->with('status', 'Jugador Actualizado');
     }
 
     /**
@@ -103,6 +121,9 @@ class JugadoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jugador = Jugador::find($id);
+        $jugador->delete();
+        File::delete('image/jugadores/' . $jugador->foto);
+        return redirect()->route('jugadores.index')->with('status', 'Jugador Eliminado');
     }
 }

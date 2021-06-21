@@ -41,7 +41,7 @@
             <small style="color: red">{{ $message }}</small>
           @enderror
         </div>
-        <button type="submit" class="btn btn-success">Crear</button>
+        <button type="submit" class="btn btn-success">Actualizar</button>
       </form>
     </div>
 @endsection
